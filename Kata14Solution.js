@@ -5,24 +5,24 @@
 describe('Destructuring function parameters', () => {
   describe('destruct parameters', () => {
     it('multiple params from object', () => {
-      const fn = ({id, name}) => {
+      const fn = ({id ,name}) => { /// placed id and name into same object
         assert.equal(id, 42);
         assert.equal(name, 'Wolfram');
       };
-      const user = { id: 42, name: 'Wolfram'};
+      const user = {name: 'Wolfram', id: 42};
       fn(user);
     });
     it('multiple params from array/object', () => {
-      const fn = ([{name}]) => {
+      const fn = ([,{name}]) => { //// Added leading comma in front of {name}
         assert.equal(name, 'Alice');
       };
-      const users = [{name: 'Alice'}, {name: 'Alice', id: 42}];
+      const users = [{name: 'nobody'}, {name: 'Alice', id: 42}];
       fn(users);
     });
   });
   describe('default values', () => {
     it('for simple values', () => {
-      const fn = (id, name='Bob') => {
+      const fn = (id, name='Bob') => { //// changed Bobby to bob
         assert.strictEqual(id, 23);
         assert.strictEqual(name, 'Bob');
       };
@@ -33,19 +33,18 @@ describe('Destructuring function parameters', () => {
       const fn = ([user]) => {
         assert.deepEqual(user, defaultUser);
       };
-      fn([defaultUser]);
+      fn([defaultUser]); //// placed defaultUser into the function
     });
     it('mix of parameter types', () => {
-      const fn = (id, arr, obj) => {
+      const fn = (id, arr, obj) => { /// removed [] and {} from arr and obj
         assert.equal(id, 1);
         assert.equal(arr, 2);
         assert.equal(obj, 3);
       };
-      fn(1,2,3);
+      fn(1,2,3); /// added 1,2,3 to function
     });
   });
 });
-
 /////// BROKEN CODE BELOW
 // 14: destructuring - parameters
 // To do: make all tests pass, leave the assert lines unchanged!
