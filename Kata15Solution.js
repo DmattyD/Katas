@@ -5,23 +5,23 @@
 describe('Assign object property values to new variables while destructuring', () => {
   describe('for simple objects', function() {
     it('use a colon after the property name, like so `propertyName: newName`', () => {
-      const y = 1;
+      const {x: y} = {x: 1}; /// changed propertyName to y, assigned x to y
       assert.equal(y, 1);
     });
     it('assign a new name and give it a default value using `= <default value>`', () => {
-      const y= 42;
+      const {x: y=42} = {y: 23}; /// assigned default of 42 to y, assigned of x to y
       assert.equal(y, 42);
     });
   });
   describe('for function parameter names', function() {
     it('do it the same way, with a colon behind it', () => {
-      const fn = ({x: y}) => {
+      const fn = ({x : y}) => { //// assigned y to x, function calls x = 1
         assert.equal(y, 1);
       };
       fn({x: 1});
     });
     it('giving it a default value is possible too, like above', () => {
-      const fn = ({x: y=3}) => {
+      const fn = ({x: y=3}) => { //// changed z to y to equal default value of 3
         assert.equal(y, 3);
       };
       fn({});
